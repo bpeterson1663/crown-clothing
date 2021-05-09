@@ -12,14 +12,13 @@ class App extends Component {
     super()
 
     this.state = {
-      currentUser: null
+      currentUser: null,
     }
-
   }
   unsubscribeFromAuth = null
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser: user})
+    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user })
     })
   }
 
@@ -30,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header currentUser={this.state.currentUser} />
         <Switch>
           <Route path="/shop" component={ShopPage} />
           <Route path="/signin" component={SignInAndSignUp} />
@@ -39,7 +38,6 @@ class App extends Component {
       </div>
     )
   }
-  
 }
 
 export default App
