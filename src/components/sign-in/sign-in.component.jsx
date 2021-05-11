@@ -22,12 +22,11 @@ class SignIn extends Component {
       auth.signInWithEmailAndPassword(email, password).then(() => {
         this.state({
           email: '',
-          password: ''
+          password: '',
         })
       })
-
-    } catch(error){
-      console.log("error in sign in: ", error)
+    } catch (error) {
+      console.log('error in sign in: ', error)
     }
     this.setState({ email: '', password: '' })
   }
