@@ -44,7 +44,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/shop" component={ShopPage} />
-          <Route exact path ="/checkout" component={CheckoutPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/signin" render={() => (this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />)} />
           <Route path="/" component={HomePage} />
         </Switch>
@@ -54,7 +54,7 @@ class App extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 })
 
 const mapDispatchToProps = (dispatch) => ({
