@@ -12,7 +12,7 @@ const CollectionsPageWithSpinner = WithSpinner(CollectionPage)
 
 class ShopPage extends Component {
   state = {
-    loading: true
+    loading: true,
   }
 
   unsubscribeFromSnapshot = null
@@ -24,7 +24,7 @@ class ShopPage extends Component {
     collectionRef.onSnapshot(async (snapshot) => {
       const collectionMap = convertCollectionsSnapshotToMap(snapshot)
       updateCollections(collectionMap)
-      this.setState({loading: false})
+      this.setState({ loading: false })
     })
   }
 
@@ -33,8 +33,15 @@ class ShopPage extends Component {
     const { loading } = this.state
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />} />
-        <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionsPageWithSpinner isLoading={loading} {...props} />} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          render={(props) => <CollectionsPageWithSpinner isLoading={loading} {...props} />}
+        />
       </div>
     )
   }
