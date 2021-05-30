@@ -7,7 +7,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component'
 import { createStructuredSelector } from 'reselect'
 import { selectCartHidden } from '../../redux/cart/cart.selectors'
 import { selectCurrentUser } from '../../redux/user/user.selector'
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink, OptionDiv } from './header.styles'
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles'
 
 const Header = ({ currentUser, hidden }) => (
   <HeaderContainer>
