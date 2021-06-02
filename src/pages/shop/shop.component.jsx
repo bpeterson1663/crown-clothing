@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { Route } from 'react-router-dom'
-import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
-import CollectionPage from '../collection/collection.component'
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container'
+import CollectionsContainer from '../collection/collection.container'
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
-import { selectIsCollectionFetching, selectIsCollectionsLoaded } from '../../redux/shop/shop.selector'
-import WithSpinner from '../../components/with-spinner/with-spinner.component'
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview)
-const CollectionsPageWithSpinner = WithSpinner(CollectionPage)
+import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selector'
 
 class ShopPage extends Component {
   state = {
@@ -23,27 +20,19 @@ class ShopPage extends Component {
   }
 
   render() {
-    const { match, isCollectionFetching, isCollectionLoaded } = this.props
+    const { match } = this.props
 
     return (
       <div className="shop-page">
-        <Route
-          exact
-          path={`${match.path}`}
-          render={(props) => <CollectionsOverviewWithSpinner isLoading={isCollectionFetching} {...props} />}
-        />
-        <Route
-          path={`${match.path}/:collectionId`}
-          render={(props) => <CollectionsPageWithSpinner isLoading={!isCollectionLoaded} {...props} />}
-        />
+        <Route exact path={`${match.path}`} component={CollectionsOverviewContainer} />
+        <Route path={`${match.path}/:collectionId`} component={CollectionsContainer} />
       </div>
     )
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  isCollectionFetching: selectIsCollectionFetching,
-  isCollectionLoaded: selectIsCollectionsLoaded
+  isCollectionLoaded: selectIsCollectionsLoaded,
 })
 
 const mapDispatchToProps = (dispatch) => ({
