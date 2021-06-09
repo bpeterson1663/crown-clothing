@@ -12,23 +12,6 @@ import { selectCurrentUser } from './redux/user/user.selector'
 
 class App extends Component {
   unsubscribeFromAuth = null
-  componentDidMount() {
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth)
-    //     userRef.onSnapshot((snapShot) => {
-    //       setCurrentUser({
-    //         currentUser: {
-    //           id: snapShot.id,
-    //           ...snapShot.data(),
-    //         },
-    //       })
-    //     })
-    //   } else {
-    //     setCurrentUser({ currentUser: userAuth })
-    //   }
-    // })
-  }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth()
