@@ -10,6 +10,7 @@ import Header from './components/header/header.component'
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import { selectCurrentUser } from './redux/user/user.selector'
 import { checkUserSession } from './redux/user/user.actions'
+
 class App extends Component {
   unsubscribeFromAuth = null
 
@@ -18,15 +19,23 @@ class App extends Component {
     checkUserSession()
   }
 
+  componentWillUnmount() {
+    this.unsubscribeFromAuth()
+  }
+
   render() {
     return (
       <div>
         <Header />
         <Switch>
+          <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
-          <Route path="/signin" render={() => (this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />)} />
-          <Route path="/" component={HomePage} />
+          <Route
+            exact
+            path="/signin"
+            render={() => (this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />)}
+          />
         </Switch>
       </div>
     )
