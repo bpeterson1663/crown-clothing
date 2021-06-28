@@ -7,10 +7,10 @@ import CollectionsContainer from '../collection/collection.container'
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions'
 import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selector'
 
-const ShopPage = ({ match, fetchCollectionsStart }) => {
+const ShopPage = ({ match, fetchCollectionsStartAsync }) => {
   useEffect(() => {
-    fetchCollectionsStart()
-  }, [fetchCollectionsStart])
+    fetchCollectionsStartAsync()
+  }, [fetchCollectionsStartAsync])
   return (
     <div className="shop-page">
       <Route exact path={`${match.path}`} component={CollectionsOverviewContainer} />
