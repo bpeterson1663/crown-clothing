@@ -19,3 +19,9 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     cartItem.id === cartItemToRemove.id ? { ...cartItem, quantity: --cartItem.quantity } : cartItem,
   )
 }
+
+export const filterItemFromCart = (cartItems, item) => cartItems.filter((cartItem) => cartItem.id !== item.id)
+
+export const getCartItemsCount = (cartItems) => cartItems.reduce((acc, item) => (acc += item.quantity), 0)
+
+export const getCartTotal = (cartItems) => cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)
