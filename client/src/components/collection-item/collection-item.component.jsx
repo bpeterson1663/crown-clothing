@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   CollectionItemContainer,
   CollectionFooterContainer,
@@ -7,11 +7,9 @@ import {
   NameContainer,
   PriceContainer,
 } from './collection-item.styles'
-import { CartContext } from '../../providers/cart/cart.provider'
 
-const CollectionItem = ({ item }) => {
+const CollectionItem = ({ item, addItem }) => {
   const { name, price, imageUrl } = item
-  const { addItem } = useContext(CartContext)
   return (
     <CollectionItemContainer>
       <BackgroundImage className="image" imageUrl={imageUrl} />
