@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost'
-import { addItemToCart } from './cart.utils'
+import { addItemToCart, getCartItemsCount } from './cart.utils'
 export const typeDefs = gql`
   extend type Item {
     quantity: Int
@@ -20,6 +20,12 @@ const GET_CART_HIDDEN = gql`
 const GET_CART_ITEMS = gql`
   {
     cartItems @client
+  }
+`
+
+const GET_ITEM_COUNT = gql`
+  {
+    itemCount @client
   }
 `
 //https://www.apollographql.com/docs/apollo-server/data/resolvers/
@@ -43,6 +49,11 @@ export const resolvers = {
       })
 
       const newCartItems = addItemToCart(cartItems, item)
+
+      cache.writeQuery({
+        query: GET_ITEM_COUNT,
+        data: { itemCount: getCartItemsCount(newCartItems) },
+      })
 
       cache.writeQuery({
         query: GET_CART_ITEMS,
