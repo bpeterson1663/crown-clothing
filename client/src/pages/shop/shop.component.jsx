@@ -7,7 +7,9 @@ import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selector'
 import Spinner from '../../components/spinner/spinner.component'
 
 const CollectionsContainer = lazy(() => import('../collection/collection.container'))
-const CollectionsOverviewContainer = lazy(() => import('../../components/collections-overview/collections-overview.container'))
+const CollectionsOverviewContainer = lazy(() =>
+  import('../../components/collections-overview/collections-overview.container'),
+)
 
 const ShopPage = ({ match, fetchCollectionsStartAsync }) => {
   useEffect(() => {
