@@ -13,6 +13,8 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-boost'
 import { resolvers, typeDefs } from './graphql/resolvers'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
 const httpLink = createHttpLink({
   uri: 'https://crwn-clothing.com',
 })
@@ -50,6 +52,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 )
+
+serviceWorkerRegistration.register()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
