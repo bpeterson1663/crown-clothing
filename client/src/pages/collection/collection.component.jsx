@@ -1,5 +1,5 @@
 import React from 'react'
-import CollectionItem from '../../components/collection-item/collection-item.component'
+import CollectionItem from '../../components/collection-item/collection-item.container'
 import './collection.styles.scss'
 
 const CollectonPage = ({ collection }) => {
