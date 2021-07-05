@@ -16,7 +16,7 @@ import { resolvers, typeDefs } from './graphql/resolvers'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const httpLink = createHttpLink({
-  uri: 'https://crwn-clothing.com',
+  uri: 'https://bpeterson1663-crwn-cloth-gql.herokuapp.com/',
 })
 
 const cache = new InMemoryCache()
