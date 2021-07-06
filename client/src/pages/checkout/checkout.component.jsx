@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
 import './checkout.styles.scss'
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
-import { CartContext } from '../../providers/cart/cart.provider'
 
-const CheckoutPage = () => {
-  const { cartItems, total } = useContext(CartContext)
+const CheckoutPage = ({ cartItems, total }) => {
   return (
     <div className="checkout-page">
       <div className="checkout-header">
