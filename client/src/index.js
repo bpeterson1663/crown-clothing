@@ -13,7 +13,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-boost'
 import { resolvers, typeDefs } from './graphql/resolvers'
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 const httpLink = createHttpLink({
   uri: 'https://bpeterson1663-crwn-cloth-gql.herokuapp.com/',
@@ -33,7 +33,7 @@ client.writeData({
     cartHidden: true,
     cartItems: [],
     itemCount: 0,
-    total: 0
+    total: 0,
   },
 })
 
