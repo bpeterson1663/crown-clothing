@@ -1,13 +1,13 @@
 import React from 'react'
 import CollectionPreview from '../collection-preview/collection-preview.component'
-import './collections-overview.styles.scss'
+import { CollectionsOverviewContianer } from './collections-overview.styles'
 
 const CollectionsOverview = ({ collections }) => (
-  <div className="collections-overview">
+  <CollectionsOverviewContianer>
     {collections.map(({ id, ...otherProps }) => (
       <CollectionPreview key={id} {...otherProps} />
     ))}
-  </div>
+  </CollectionsOverviewContianer>
 )
 
 export default CollectionsOverview
