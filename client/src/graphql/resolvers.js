@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost'
-import { addItemToCart, getCartItemsCount, getCartTotal } from './cart.utils'
+import { addItemToCart, getCartItemsCount, getCartTotal, removeItemFromCart } from './cart.utils'
 export const typeDefs = gql`
   extend type Item {
     quantity: Int
@@ -8,6 +8,7 @@ export const typeDefs = gql`
   extend type Mutation {
     ToggleCartHidden: Boolean!
     AddItemToCart(item: Item!): [Item]!
+    RemoveItemFromCart(item: Item!): [Item]!
   }
 ` //Type definitions need to be capitalized
 
@@ -19,7 +20,7 @@ const GET_CART_HIDDEN = gql`
 
 const GET_CART_ITEMS = gql`
   {
-    cartItems @client,
+    cartItems @client
     total @client
   }
 `
@@ -29,6 +30,7 @@ const GET_ITEM_COUNT = gql`
     itemCount @client
   }
 `
+
 //https://www.apollographql.com/docs/apollo-server/data/resolvers/
 export const resolvers = {
   Mutation: {
@@ -44,13 +46,30 @@ export const resolvers = {
 
       return !cartHidden
     },
+    removeItemFromCart: (_root, { item }, { cache }) => {
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS,
+      })
+
+      const newCartItems = removeItemFromCart(cartItems, item)
+      const newTotal = getCartTotal(newCartItems)
+      cache.writeQuery({
+        query: GET_ITEM_COUNT,
+        data: { itemCount: getCartItemsCount(newCartItems) },
+      })
+
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: { cartItems: newCartItems, total: newTotal },
+      })
+    },
     addItemToCart: (_root, { item }, { cache }) => {
       const { cartItems } = cache.readQuery({
         query: GET_CART_ITEMS,
       })
 
       const newCartItems = addItemToCart(cartItems, item)
-      const newTotal = getCartTotal(cartItems)
+      const newTotal = getCartTotal(newCartItems)
       cache.writeQuery({
         query: GET_ITEM_COUNT,
         data: { itemCount: getCartItemsCount(newCartItems) },
