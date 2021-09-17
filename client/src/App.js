@@ -1,6 +1,5 @@
 import React, { useEffect, lazy, Suspense } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector, useDispatch } from 'react-redux'
 import { GlobalStyle } from './global.styles'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Header from './components/header/header.container'
@@ -14,10 +13,13 @@ const ShopPage = lazy(() => import('./pages/shop/shop.component'))
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.container'))
 const SignInAndSignUp = lazy(() => import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component'))
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = () => {
+  const currentUser = useSelector(selectCurrentUser)
+  const dispatch = useDispatch()
+  
   useEffect(() => {
-    checkUserSession()
-  }, [checkUserSession])
+    dispatch(checkUserSession())
+  }, [dispatch])
 
   return (
     <div>
@@ -37,12 +39,4 @@ const App = ({ checkUserSession, currentUser }) => {
   )
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  checkUserSession: () => dispatch(checkUserSession()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
