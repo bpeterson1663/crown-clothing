@@ -1,6 +1,4 @@
 import React, { useContext } from 'react'
-import { Mutation } from 'react-apollo'
-import { gql } from 'apollo-boost'
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -13,14 +11,6 @@ import {
 } from './checkout-item.styles'
 import { CartContext } from '../../providers/cart/cart.provider'
 
-const ADD_REMOVE_ITEM_TO_CART = gql`
-  mutation AddItemToCart($item: Item!) {
-    addItemToCart(item: $item) @client
-  }
-  mutation RemoveItemFromCart($item: Item!) {
-    removeItemFromCart(item: $item) @client
-  }
-`
 const CheckoutItem = ({ cartItem }) => {
   const { name, quantity, price, imageUrl } = cartItem
   const { addItem, removeItem, clearItemFromCart } = useContext(CartContext)
