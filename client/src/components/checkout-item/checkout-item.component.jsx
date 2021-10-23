@@ -25,23 +25,19 @@ const CheckoutItem = ({ cartItem }) => {
   const { name, quantity, price, imageUrl } = cartItem
   const { addItem, removeItem, clearItemFromCart } = useContext(CartContext)
   return (
-    <Mutation mutation={ADD_REMOVE_ITEM_TO_CART}>
-      {({ addItemToCart, removeItemFromCart }) => (
-        <CheckoutItemContainer>
-          <ImageContainer>
-            <CheckoutImage alt="item" src={imageUrl} />
-          </ImageContainer>
-          <InfoSpan>{name}</InfoSpan>
-          <Quantity>
-            <Arrow onClick={() => removeItemFromCart(cartItem)}>&#10094;</Arrow>
-            <Value>{quantity}</Value>
-            <Arrow onClick={() => addItemToCart(cartItem)}>&#10095;</Arrow>
-          </Quantity>
-          <InfoSpan>{price}</InfoSpan>
-          <RemoveButton onClick={() => clearItemFromCart(cartItem)}>&#10005;</RemoveButton>
-        </CheckoutItemContainer>
-      )}
-    </Mutation>
+    <CheckoutItemContainer>
+      <ImageContainer>
+        <CheckoutImage alt="item" src={imageUrl} />
+      </ImageContainer>
+      <InfoSpan>{name}</InfoSpan>
+      <Quantity>
+        <Arrow onClick={() => removeItem(cartItem)}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={() => addItem(cartItem)}>&#10095;</Arrow>
+      </Quantity>
+      <InfoSpan>{price}</InfoSpan>
+      <RemoveButton onClick={() => clearItemFromCart(cartItem)}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   )
 }
 
